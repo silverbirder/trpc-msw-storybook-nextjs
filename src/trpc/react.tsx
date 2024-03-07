@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpLink, loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { useState } from "react";
 
@@ -29,14 +29,6 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
     api.createClient({
       transformer,
       links: [
-        httpLink({
-          url: getUrl(),
-          headers() {
-            return {
-              "content-type": "application/json",
-            };
-          },
-        }),
         loggerLink({
           enabled: (op) =>
             process.env.NODE_ENV === "development" ||
@@ -46,7 +38,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
           url: getUrl(),
         }),
       ],
-    })
+    }),
   );
 
   return (

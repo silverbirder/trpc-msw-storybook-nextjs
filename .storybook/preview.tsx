@@ -1,18 +1,17 @@
-import type { Preview } from '@storybook/react'
-import { initialize, mswLoader } from 'msw-storybook-addon';
-import React from 'react';
-import { TRPCReactProvider } from "../src/trpc/react";
-
+import React from "react";
+import type { Preview } from "@storybook/react";
+import { initialize, mswLoader } from "msw-storybook-addon";
+import { TRPCReactProvider } from "../src/trpc/msw";
 // Initialize MSW
 initialize();
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },
